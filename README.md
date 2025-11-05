@@ -1,4 +1,4 @@
-===A Discord Bot===
+# A Discord Bot
 
 The purpose of this discord bot is to post a coded check-in into discord channels as configured. 
 
