@@ -74,8 +74,8 @@ async function getChannels() {
 }
 
 function generateCode() {
-	const alphabet = 'ABCDEFGHKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789=-!@#$%^&';
-	const length = (Math.random() * 3) + 3; /* Generate length from 3 to 5 */
+	const alphabet = 'ABCDEFGHKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789';
+	const length = 3; 
 	let result = '';
 	for (i = 0; i < length; i++) {
 		const index = Math.floor(Math.random() * alphabet.length);
@@ -87,6 +87,8 @@ function generateCode() {
 		'CH[I1!]+NK','CR[O0]+W','D[E3]+[I1!]+','D[I1!]+NK',
 		'FL[I1!]+P','N[E3]+GR[O0]+','K[I1!]+T[E3]+',
 		'[KM][I1!]+{A@]+','NR[A@]+',
+		'KKK','[I1!]+CE','KGB','18-','K[I1!]D','CH[I1!]LD',
+		'TRUMP','FTRMP','[O0]BAMA','K[I1!]RK', 
 		/* TODO: add additional banned words */
 		];
 	for (const ban of bannedWords) {
