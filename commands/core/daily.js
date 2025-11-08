@@ -89,6 +89,10 @@ function generateCode() {
 		'[KM][I1!]+{A@]+','NR[A@]+',
 		'KKK','[I1!]+CE','KGB','18-','K[I1!]D','CH[I1!]LD',
 		'TRUMP','FTRMP','[O0]BAMA','K[I1!]RK', 
+		'311','420','666','911','COP','D[I1!]E',
+		'FCK','FKN','FUC','FUQ','G[A4]S','G[O0]D', 
+		'GUN','H[I1!]V','H[I1!]T','K[I1!]L','LSD',
+		'[O0]XY','PCP','P[0O]T','WAR','HJT'
 		/* TODO: add additional banned words */
 		];
 	for (const ban of bannedWords) {
