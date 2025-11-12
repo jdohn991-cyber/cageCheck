@@ -106,8 +106,11 @@ async function removeRoleFromChannel(channel, role) {
 async function getRoles(channel) {
 	await file_load('daily-roles');
 	var result = [];
+	console.log("getting roles");
 	for (const r of file_data['daily-roles']) {
+		console.log(JSON.stringify(r));
 		if (r.channel == channel.id) {
+			console.log('adding role');
 			result.push(r);
 		}
 	}
@@ -200,10 +203,11 @@ async function dailyCall(client) {
 	/* For each channel, make a post */
 	for (const v of channels) {
 		let code = generateCode();
-		const roles = getRoles(v);
+		const roles = await getRoles(v);
 		roleTags = '';
+		console.log(JSON.stringify(roles));
 		for (const r of roles) {
-			roleTags += `<@&${role.id}>`;
+			roleTags += `<@&${r.id}>`;
 		}
 		console.log(`Code for ${v.name} is "${code}"`);
 		client.channels.fetch(v.id)
