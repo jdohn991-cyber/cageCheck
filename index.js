@@ -55,9 +55,11 @@ const { dailyCaller } = require('./commands/core/daily.js');
  */
 cron.schedule('0 * * * * *', () => {
 	const now = new Date();
-	if (now.getHours() == 14 && now.getMinutes() == 0) {
+	/* 14:00 == CENTRAL STANDARD 8am */
+	/* 12:30 == EASTERN STANDARD 7:30am */
+	if (now.getHours() == 12 && now.getMinutes() == 30) {
 		console.log(`cron started at ${now}`);
-		console.log('cron running at 8AM Central Standard Time');
+		console.log('cron running at 7:30AM Eastern Standard Time');
 		dailyCaller(client);
 	}
 });

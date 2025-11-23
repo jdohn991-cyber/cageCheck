@@ -106,11 +106,8 @@ async function removeRoleFromChannel(channel, role) {
 async function getRoles(channel) {
 	await file_load('daily-roles');
 	var result = [];
-	console.log("getting roles");
 	for (const r of file_data['daily-roles']) {
-		console.log(JSON.stringify(r));
 		if (r.channel == channel.id) {
-			console.log('adding role');
 			result.push(r);
 		}
 	}
@@ -158,7 +155,7 @@ async function getChannels() {
 
 /* Generate a code for the check-in */
 function generateCode() {
-	const alphabet = 'ABCDEFGHKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz23456789';
+	const alphabet = 'ABCDEFGHKLMNPQRSTUVWXYZ12345678901234567890';
 	const length = 3; 
 	let result = '';
 	/* Build code character by character */
@@ -174,7 +171,7 @@ function generateCode() {
 		'[KM][I1!]+{A@]+','NR[A@]+',
 		'KKK','[I1!]+CE','KGB','18-','K[I1!]D','CH[I1!]LD',
 		'TRUMP','FTRMP','[O0]BAMA','K[I1!]RK', 
-		'311','420','666','911','COP','D[I1!]E',
+		'3[I1!]+','420','666','9[I1!]+','COP','D[I1!]E',
 		'FCK','FKN','FUC','FUQ','G[A4]S','G[O0]D', 
 		'GUN','H[I1!]V','H[I1!]T','K[I1!]L','LSD',
 		'[O0]XY','PCP','P[0O]T','WAR','HJT'
@@ -210,19 +207,23 @@ async function dailyCall(client) {
 			roleTags += `<@&${r.id}>`;
 		}
 		console.log(`Code for ${v.name} is "${code}"`);
-		client.channels.fetch(v.id)
-			.then(targetChannel => {
-				if (targetChannel && targetChannel.isTextBased()) {
-					targetChannel.send(`:loudspeaker: ${date} - Cage Check Call!\n`
-						+`${roleTags}\n`
-						+`Today's photo code is: ${code}\n\n`
-						+`Rules summary:\n`
-						+`Option 1 - Photo Check :camera_with_flash:: Post a photo showing both your cage and the code of the day\n`
-						+`Option 2 - Honor Check :medal:: React with :lock: if caged, or with :no_hard_on: if not caged and uncummed`);
-				} else {
-					console.log('Channel not found or not a text-based channel');
-				}
-			});
+		try {
+			client.channels.fetch(v.id)
+				.then(targetChannel => {
+					if (targetChannel && targetChannel.isTextBased()) {
+						targetChannel.send(`:loudspeaker: ${date} - Cage Check Call!\n`
+							+`${roleTags}\n`
+							+`Today's photo code is: ${code}\n\n`
+							+`Rules summary:\n`
+							+`Option 1 - Photo Check :camera_with_flash:: Post a photo showing both your cage and the code of the day\n`
+							+`Option 2 - Honor Check :medal:: React with :lock: if caged, or with :no_entry_sign: if not caged and uncummed`);
+					} else {
+						console.log('Channel not found or not a text-based channel');
+					}
+				});
+		} catch (err) {
+			console.log(`error sending a code message to ${v.name}`);
+		}
 	}
 }
 
